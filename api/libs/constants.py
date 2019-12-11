@@ -28,4 +28,8 @@ INVALID_KEY = {
     "detail": "INVALID API KEY"
 }
 
+# example template 
 template_file = os.path.join(BASE_DIR, 'test_template.csv')
+
+# locationiq api url.
+locationiq_url = 'https://us1.locationiq.com/v1/search.php?format=json'

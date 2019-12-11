@@ -6,7 +6,7 @@ from .models import (
                     AdressLtude,       
                     )
 
-
+# list longitude and latitude details serializer
 class AddresLtudeGetSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -14,6 +14,7 @@ class AddresLtudeGetSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+# add latitude longitude data serializer
 class AddresLtudeAddSerializer(serializers.ModelSerializer):
 	
     class Meta:

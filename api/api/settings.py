@@ -130,5 +130,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# locationiq url.
-LOCATIONIQ_URL = 'https://us1.locationiq.com/v1/search.php?format=json'
+

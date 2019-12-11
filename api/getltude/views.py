@@ -41,8 +41,9 @@ from .models import (
 class LtudeViewSet(GenericViewSet):
 	"""
 	"""
-	model = AdressLtude
+	model = AdressLtude # model assignation
 
+	# serialser dictionary
 	serializers_dict = {
 		'getltudes' : AddresLtudeAddSerializer,
 		'listltudes': AddresLtudeGetSerializer
@@ -62,12 +63,17 @@ class LtudeViewSet(GenericViewSet):
 
 	@action(methods=['post'], detail=False)
 	def getltudes(self,request):
+		'''
+		This api will receive the key and file as parameter
+		it will read the received file skip first row(header)
+		gets the longitude and latitude from locationiq api and insert into table
+		'''
 		try:
 			data = request.data
 			csvfile = request.FILES['input_file'] # uploaded file receiving
-			address_list = read_file.read_uploads(csvfile)[1:]
+			address_list = read_file.read_uploads(csvfile)[1:]# reading the file
 			for i in address_list:
-				l,k = ltude_obj.get_ltudes(i,data["key"])
+				l,k = ltude_obj.get_ltudes(i,data["key"])# finding longitude and latitude
 				response_data = {"address":i,'latitude':l,'longitude':k}
 				serializer = self.get_serializer(data = response_data)
 				if serializer.is_valid():
@@ -80,6 +86,9 @@ class LtudeViewSet(GenericViewSet):
 
 	@action(methods=['get'], detail=False)
 	def listltudes(self,request):
+		'''
+		This api will response the list of all data
+		'''
 		try:
 			data = self.get_serializer(self.get_queryset(), many=True).data 
 			return Response(data, status=status.HTTP_200_OK)
@@ -88,9 +97,9 @@ class LtudeViewSet(GenericViewSet):
 
 	@action(methods=['delete'], detail=False)
 	def cleardata(self, request):
-		"""
-		delete all the records from table.
-		"""
+		'''
+		clear the existing table.
+		'''
 		self.get_queryset().delete()
 		return Response(({"status":"deleted all existed data"}),
 			status=status.HTTP_200_OK)
@@ -98,13 +107,28 @@ class LtudeViewSet(GenericViewSet):
 
 	@action(methods=['get'], detail=False)
 	def get_template_file(self, request):
-		"""
-		use to download csv file.
-		"""
+		'''
+		This api will gives the example template file
+		'''
 		file = template_file
 		FilePointer = open(file,"r")
 		response = HttpResponse(FilePointer,content_type='application/csv')
 		response['Content-Disposition'] = 'attachment; filename=address_template.csv'
+		return response
+
+
+	@action(methods=['get'], detail=False)
+	def get_address(self, request):
+		'''
+		this api will download the existing data from table
+		'''
+		response = HttpResponse(content_type='text/csv')
+		response['Content-Disposition'] = 'attachment; filename="adress_ltude.csv"'
+		writer = csv.writer(response, delimiter=',')
+
+		writer.writerow(['Address','latitude','longitude']) 
+		for i in self.get_queryset():
+			writer.writerow([i.address,i.latitude,i.longitude])
 		return response
 
 
