@@ -18,30 +18,6 @@ from .constants import(
 
 logger = logging.getLogger(__name__)
 
-
-# def getlatlon(address, key, url=URL):
-# 	"""
-# 	This function is used to get the latitude and longitude address.
-# 	"""
-# 	PARAMS = {}
-# 	PARAMS['key'] = key
-# 	PARAMS['q'] = address
-
-# 	try: 
-# 		response = requests.get(url=url, params=PARAMS)
-# 		if response.status_code == 200:
-# 			data = response.json()
-# 			lat = data[0]['lat'] 
-# 			lon = data[0]['lon']
-# 			return lat, lon
-
-# 	except Exception as e:
-# 		print(str(e))
-# 		raise NetworkException(errors=str(e))
-		
-# 	return 0, 0
-
-
 class Ltude:
 	def __init__(self):
 		self.request_session = requests.Session()
@@ -69,8 +45,6 @@ class Ltude:
 			logger.error("request failed", exc_info=True)
 
 
-# Ltude_obj = Ltude()
-# print(Ltude_obj.get_ltudes("bastwad Belagavi",'984aabebe49559'))
 
 
 
