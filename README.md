@@ -29,5 +29,7 @@ This project will receive the file with address and computes the logitude and la
 
 	curl -X GET \
 	http://127.0.0.1:8000/api/v1/ltude/get_template_file/ \
-    -H 'Content-Type: application/json'
+    	-H 'Content-Type: application/json'
+	
+	Note : As response template file will be downloaded
 
