@@ -1,5 +1,5 @@
 # geography-locator
-This project will receive the file with address and computes the logitude and latitude of that address and you can download the response in csv file
+This project will receive the file with address and computes the logitude and latitude of that address and you can download the response in csv file.
 
 ### Basic Requirements
 
