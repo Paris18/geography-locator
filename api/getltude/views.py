@@ -94,7 +94,7 @@ class LtudeViewSet(GenericViewSet):
 			raise BadRequestException(BAD_REQUEST)
 
 
-	@action(methods=['post'], detail=False)
+	@action(methods=['get'], detail=False)
 	def getltude(self,request):
 		'''
 		This api will receive the key and file as parameter
